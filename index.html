@@ -199,5 +199,41 @@ a{text-decoration:none}
   <span>© 2026 SOUTHSIDE DAKAR</span>
   <span>DAKAR • SENEGAL</span>
 </footer>
+  <script>
+document.querySelectorAll(".order-whatsapp").forEach(function(link) {
+  link.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    const product = link.dataset.product;
+    const paymentId = product === "Be Yourself Shirt"
+      ? "payment-be-yourself"
+      : "payment-west-coast";
+
+    const payment = document.getElementById(paymentId).value;
+
+    const group = document.querySelector(
+      '.sizes[data-product-sizes="' + product + '"]'
+    );
+
+    const selected = group
+      ? group.querySelector("button.selected")
+      : null;
+
+    const size = selected ? selected.textContent.trim() : "à préciser";
+
+    const message =
+      "Bonjour Southside Dakar, je souhaite commander : " + product +
+      "\nTaille : " + size +
+      "\nMode de paiement : " + payment +
+      "\nMerci de me confirmer les modalités.";
+
+    window.open(
+      "https://wa.me/221766488301?text=" + encodeURIComponent(message),
+      "_blank"
+    );
+  });
+});
+</script>
+
 </body>
 </html>
